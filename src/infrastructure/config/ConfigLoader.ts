@@ -44,7 +44,7 @@ interface YamlConfig {
 }
 
 export class ConfigLoader {
-  private static readonly CONFIG_PATH = './config.yaml';
+  private static readonly CONFIG_PATH = `${import.meta.dir}/../../../config.yaml`;
   private static readonly DEFAULT_PROMPT = `あなたは優れたGitコミットメッセージを生成するアシスタントです。以下の差分に基づいて、簡潔で日本語の説明的なコミットメッセージを生成してください。コミットの種類（feat、fix、refactorなど）を含め、従来のコミット形式に従ってください: 種類(範囲): 説明`;
 
   static async load(): Promise<Config> {
