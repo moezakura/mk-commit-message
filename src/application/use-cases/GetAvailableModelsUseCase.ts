@@ -19,6 +19,14 @@ export class GetAvailableModelsUseCase {
       return ModelId.create(this.defaultGroqModel);
     }
 
+    if (this.apiMode.isGeminiCli() || this.apiMode.isClaudeCode() || this.apiMode.isCodex()) {
+      const models = await this.llmRepository.getAvailableModels();
+      if (models.length === 0) {
+        throw new Error('利用可能なモデルが見つかりませんでした');
+      }
+      return models[0];
+    }
+
     const models = await this.llmRepository.getAvailableModels();
     
     if (models.length === 0) {
