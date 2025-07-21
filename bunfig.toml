@@ -1,0 +1,9 @@
+# Bun configuration file
+
+[install]
+# Optional: auto-install peer dependencies
+peer = true
+
+[run]
+# Bun will run `.ts` and `.tsx` files with Bun directly
+bun = true
