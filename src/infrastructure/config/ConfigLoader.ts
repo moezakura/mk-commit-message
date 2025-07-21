@@ -11,6 +11,9 @@ export interface Config {
   defaultOpenRouterModel: string;
   defaultGroqModel: string;
   systemPrompt: string;
+  geminiCliEnabled: boolean;
+  claudeCodeEnabled: boolean;
+  codexEnabled: boolean;
 }
 
 interface YamlConfig {
@@ -27,6 +30,15 @@ interface YamlConfig {
     api_base_url: string;
     api_key: string;
     default_model: string;
+  };
+  gemini_cli?: {
+    enabled: boolean;
+  };
+  claude_code?: {
+    enabled: boolean;
+  };
+  codex?: {
+    enabled: boolean;
   };
   commit_prompt: string;
 }
@@ -62,7 +74,10 @@ export class ConfigLoader {
         groqApiKey,
         defaultOpenRouterModel: yamlConfig.openrouter?.default_model || 'deepseek/deepseek-r1',
         defaultGroqModel: yamlConfig.groq?.default_model || 'llama3-8b-8192',
-        systemPrompt: yamlConfig.commit_prompt || this.DEFAULT_PROMPT
+        systemPrompt: yamlConfig.commit_prompt || this.DEFAULT_PROMPT,
+        geminiCliEnabled: yamlConfig.gemini_cli?.enabled ?? true,
+        claudeCodeEnabled: yamlConfig.claude_code?.enabled ?? true,
+        codexEnabled: yamlConfig.codex?.enabled ?? true
       };
     } catch (error) {
       console.error(`設定ファイル読み込みエラー: ${error}`);
