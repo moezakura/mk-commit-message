@@ -8,6 +8,9 @@ import { GitCommandRepository } from './src/infrastructure/repositories/GitComma
 import { LocalLLMRepository } from './src/infrastructure/repositories/LocalLLMRepository';
 import { OpenRouterLLMRepository } from './src/infrastructure/repositories/OpenRouterLLMRepository';
 import { GroqLLMRepository } from './src/infrastructure/repositories/GroqLLMRepository';
+import { GeminiCLILLMRepository } from './src/infrastructure/repositories/GeminiCLILLMRepository';
+import { ClaudeCodeLLMRepository } from './src/infrastructure/repositories/ClaudeCodeLLMRepository';
+import { CodexLLMRepository } from './src/infrastructure/repositories/CodexLLMRepository';
 import { InMemoryCommitMessageRepository } from './src/infrastructure/repositories/InMemoryCommitMessageRepository';
 import { ConfigLoader } from './src/infrastructure/config/ConfigLoader';
 import { ColorFormatter } from './src/presentation/utils/ColorFormatter';
@@ -33,6 +36,12 @@ async function main() {
       llmRepository = new OpenRouterLLMRepository(config.openRouterApiBaseUrl, config.openRouterApiKey);
     } else if (config.apiMode.isGroq()) {
       llmRepository = new GroqLLMRepository(config.groqApiBaseUrl, config.groqApiKey);
+    } else if (config.apiMode.isGeminiCli()) {
+      llmRepository = new GeminiCLILLMRepository();
+    } else if (config.apiMode.isClaudeCode()) {
+      llmRepository = new ClaudeCodeLLMRepository();
+    } else if (config.apiMode.isCodex()) {
+      llmRepository = new CodexLLMRepository();
     } else {
       throw new Error(`Unsupported API mode: ${config.apiMode.toString()}`);
     }
