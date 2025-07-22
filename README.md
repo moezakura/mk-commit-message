@@ -14,7 +14,7 @@ Git コミットメッセージを自動生成する CLI ツールです。AIを
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/yourusername/mk-git-commit.git
+git clone https://github.com/moezakura/mk-commit-message.git
 cd mk-git-commit
 
 # 依存関係をインストール
